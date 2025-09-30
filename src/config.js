@@ -1,4 +1,4 @@
 export const config = {
-  userToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImZkYzgwMzllLTA2ZjAtNGMyYi1iYmMwLWE1ZWNjZDE1OWQ4MCIsIm5hbWUiOiJSb2RvbGZvIiwiaWF0IjoxNzIxMzMzMjY2LCJleHAiOjE3MjE3NjUyNjZ9.Qt9jFtmU8RqLuV2chAdAoqWsssXxBQSo226Ohrq8FS8',
-  apiUrl: 'http://localhost:3001'
+  userToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE5NjQ0NTZhLTY0OTUtNDc0YS05ZjA0LWZiY2VmZTY4OGRmMyIsIm5hbWUiOiJLw6Fzc2lvIEJhcnJvcyIsImlhdCI6MTc1OTI2NDQyOCwiZXhwIjoxNzU5Njk2NDI4fQ.8jrvuIH5cNijEQErOEJpQLUcQcS4hUGaK5rulRL8vs4',
+  apiUrl: 'http://localhost:3000'
 }

@@ -2,8 +2,8 @@ import axios from 'axios';
 import FormData from 'form-data';
 import fs from 'node:fs';
 import { config } from './config.js';
-import { products } from './data/products.js';
 import { categories } from './data/categories.js';
+import { products } from './data/products.js';
 
 // Preencha as informações no arquivo "./config.js"
 const api = axios.create({
@@ -27,7 +27,7 @@ async function seed() {
           'Content-Type': 'multipart/form-data',
         }
       });
-  
+
       console.log(createdCategory);
     } catch (err) {
       console.log(err);
@@ -51,7 +51,7 @@ async function seed() {
           'Content-Type': 'multipart/form-data',
         }
       });
-  
+
       console.log(createdProduct);
     } catch (err) {
       console.log(err);
