@@ -2,7 +2,7 @@ import axios from 'axios';
 import FormData from 'form-data';
 import fs from 'node:fs';
 import { config } from './config.js';
-import { categories } from './data/categories.js';
+// import { categories } from './data/categories.js';  // Comentei, não precisa mais
 import { products } from './data/products.js';
 
 // Preencha as informações no arquivo "./config.js"
@@ -15,49 +15,34 @@ const api = axios.create({
 
 // Pra rodar é só dar um "npm start"
 async function seed() {
-  for (const category of categories) {
-    const categoryForm = new FormData();
+  // Não limpa nada, só adiciona produtos (assumindo categoria já existe com ID 5)
 
-    categoryForm.append('name', category.name);
-    categoryForm.append('file', fs.createReadStream(category.file));
-
-    try {
-      const { data: createdCategory } = await api.post('/categories', categoryForm, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        }
-      });
-
-      console.log(createdCategory);
-    } catch (err) {
-      console.log(err);
-      process.exit();
-    }
-  }
+  console.log('🚀 Iniciando adição dos 9 produtos...');
 
   for (const product of products) {
     const productForm = new FormData();
 
     productForm.append('name', product.name);
     productForm.append('price', product.price);
-    productForm.append('category_id', product.category_id);
+    productForm.append('category_id', product.category_id);  // Usa o 5 fixo do seu data
     productForm.append('offer', String(product.offer));
     productForm.append('file', fs.createReadStream(product.file));
-
 
     try {
       const { data: createdProduct } = await api.post('/products', productForm, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          ...productForm.getHeaders(),  // Headers automáticos pro FormData
         }
       });
 
-      console.log(createdProduct);
+      console.log('✅ Produto criado:', createdProduct.name, '(ID:', createdProduct.id, ')');
     } catch (err) {
-      console.log(err);
-      process.exit();
+      console.error('❌ Erro no produto', product.name, ':', err.response?.data || err.message);
+      // Não para o script aqui, continua pros próximos (pra não perder os outros)
     }
   }
+
+  console.log('🎉 Adição dos 9 produtos concluída! Verifique no banco.');
 }
 
 seed();
